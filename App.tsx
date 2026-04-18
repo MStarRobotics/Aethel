@@ -78,11 +78,11 @@ export default function App() {
           <WelcomeScreen
             onCreateAccount={() => setScreen('signup')}
             onLogin={() => setScreen('login')}
-            onGoogleLogin={() => console.log('→ Google OAuth')}
-            onAppleLogin={() => console.log('→ Apple OAuth')}
+            onGoogleLogin={() => {}}
+            onAppleLogin={() => {}}
             onSkip={() => setScreen('login')}
-            onTerms={() => console.log('→ Terms webview')}
-            onPrivacy={() => console.log('→ Privacy webview')}
+            onTerms={() => {}}
+            onPrivacy={() => {}}
           />
         )}
         {screen === 'signup' && (
@@ -92,20 +92,20 @@ export default function App() {
               setSignupEmail(data.email);
               setScreen('verify-email');
             }}
-            onGoogleLogin={() => console.log('→ Google OAuth')}
-            onAppleLogin={() => console.log('→ Apple OAuth')}
+            onGoogleLogin={() => {}}
+            onAppleLogin={() => {}}
             onLogin={() => setScreen('login')}
-            onTerms={() => console.log('→ Terms webview')}
-            onPrivacy={() => console.log('→ Privacy webview')}
+            onTerms={() => {}}
+            onPrivacy={() => {}}
           />
         )}
         {screen === 'login' && (
           <LoginScreen
             onBack={() => setScreen('welcome')}
-            onLogin={(data) => console.log('→ Login', data)}
+            onLogin={(_data) => { setScreen('home'); }}
             onForgotPassword={() => setScreen('forgot-password')}
-            onGoogleLogin={() => console.log('→ Google OAuth')}
-            onAppleLogin={() => console.log('→ Apple OAuth')}
+            onGoogleLogin={() => {}}
+            onAppleLogin={() => {}}
             onSignUp={() => setScreen('signup')}
           />
         )}
@@ -113,8 +113,8 @@ export default function App() {
           <ForgotPasswordScreen
             onBack={() => setScreen('login')}
             onBackToLogin={() => setScreen('login')}
-            onSendReset={async (email) => console.log('→ Reset link sent to', email)}
-            onResend={async (email) => console.log('→ Resend reset link to', email)}
+            onSendReset={async (_email) => {}}
+            onResend={async (_email) => {}}
           />
         )}
         {screen === 'verify-email' && (
@@ -122,15 +122,14 @@ export default function App() {
             email={signupEmail}
             onBack={() => setScreen('signup')}
             onVerified={() => setScreen('onboarding-1')}
-            onResend={async () => console.log('→ Resend OTP')}
+            onResend={async () => {}}
             onChangeEmail={() => setScreen('signup')}
           />
         )}
         {screen === 'onboarding-1' && (
           <OnboardingStep1Screen
             onBack={() => setScreen('verify-email')}
-            onContinue={(data) => {
-              console.log('→ Onboarding step 1', data);
+            onContinue={(_data) => {
               setScreen('onboarding-2');
             }}
           />
@@ -138,19 +137,17 @@ export default function App() {
         {screen === 'onboarding-2' && (
           <OnboardingStep2Screen
             onBack={() => setScreen('onboarding-1')}
-            onContinue={(data) => {
-              console.log('→ Onboarding step 2', data);
+            onContinue={(_data) => {
               setScreen('onboarding-3');
             }}
             onSkip={() => setScreen('onboarding-3')}
-            onPhotoGuide={() => console.log('→ Photo guide')}
+            onPhotoGuide={() => {}}
           />
         )}
         {screen === 'onboarding-3' && (
           <OnboardingStep3Screen
             onBack={() => setScreen('onboarding-2')}
-            onContinue={(data) => {
-              console.log('→ Onboarding step 3', data);
+            onContinue={(_data) => {
               setScreen('onboarding-4');
             }}
             onSkip={() => setScreen('onboarding-4')}
@@ -159,8 +156,7 @@ export default function App() {
         {screen === 'onboarding-4' && (
           <OnboardingStep4Screen
             onBack={() => setScreen('onboarding-3')}
-            onContinue={(data) => {
-              console.log('→ Onboarding step 4', data);
+            onContinue={(_data) => {
               setScreen('onboarding-5');
             }}
           />
@@ -168,8 +164,7 @@ export default function App() {
         {screen === 'onboarding-5' && (
           <OnboardingStep5Screen
             onBack={() => setScreen('onboarding-4')}
-            onContinue={(data) => {
-              console.log('→ Onboarding step 5', data);
+            onContinue={(_data) => {
               setScreen('onboarding-6');
             }}
           />
@@ -177,18 +172,17 @@ export default function App() {
         {screen === 'onboarding-6' && (
           <OnboardingStep6Screen
             onBack={() => setScreen('onboarding-5')}
-            onFinish={(data) => {
-              console.log('→ Onboarding complete', data);
+            onFinish={(_data) => {
               setScreen('home');
             }}
           />
         )}
         {screen === 'home' && (
           <HomeDiscoverScreen
-            onNotifications={() => console.log('→ Notifications')}
-            onSettings={() => console.log('→ Settings')}
-            onCardTap={(p) => console.log('→ Profile', p.id)}
-            onSendMessage={(p) => console.log('→ Message', p.id)}
+            onNotifications={() => {}}
+            onSettings={() => {}}
+            onCardTap={(_p) => {}}
+            onSendMessage={(_p) => {}}
             onAdjustPreferences={() => setScreen('onboarding-5')}
             onTabPress={(tab) => {
               if (tab === 'search') setScreen('search');
@@ -202,8 +196,8 @@ export default function App() {
         )}
         {screen === 'search' && (
           <SearchScreen
-            onProfileTap={(id) => console.log('→ Profile', id)}
-            onLike={(id) => console.log('→ Like', id)}
+            onProfileTap={(_id) => {}}
+            onLike={(_id) => {}}
             onTabPress={(tab) => {
               if (tab === 'feed') setScreen('home');
               if (tab === 'qa') setScreen('qa');
@@ -214,7 +208,7 @@ export default function App() {
         )}
         {screen === 'qa' && (
           <QAScreen
-            onSettings={() => console.log('→ Q&A settings')}
+            onSettings={() => {}}
             onTabPress={(tab) => {
               if (tab === 'feed') setScreen('home');
               if (tab === 'search') setScreen('search');
@@ -225,10 +219,10 @@ export default function App() {
         )}
         {screen === 'feed' && (
           <FeedScreen
-            onSendMessage={(id) => console.log('→ Message', id)}
-            onViewProfile={(id) => console.log('→ Profile', id)}
-            onLike={(id) => console.log('→ Like', id)}
-            onNotifications={() => console.log('→ Notifications')}
+            onSendMessage={(_id) => {}}
+            onViewProfile={(_id) => {}}
+            onLike={(_id) => {}}
+            onNotifications={() => {}}
             onTabPress={(tab) => {
               if (tab === 'feed') setScreen('home');
               if (tab === 'search') setScreen('search');
@@ -241,9 +235,9 @@ export default function App() {
         )}
         {screen === 'messages' && (
           <MessagesScreen
-            onConversation={(id) => console.log('→ Conversation', id)}
-            onSearch={() => console.log('→ Search messages')}
-            onCompose={() => console.log('→ New message')}
+            onConversation={(_id) => {}}
+            onSearch={() => {}}
+            onCompose={() => {}}
             onTabPress={(tab) => {
               if (tab === 'feed') setScreen('home');
               if (tab === 'search') setScreen('search');
@@ -255,11 +249,11 @@ export default function App() {
         )}
         {screen === 'visitors' && (
           <VisitorsScreen
-            onViewProfile={(id) => console.log('→ Profile', id)}
-            onLike={(id) => console.log('→ Like', id)}
-            onMessage={(id) => console.log('→ Message', id)}
-            onUnlock={() => console.log('→ Premium')}
-            onNotifications={() => console.log('→ Notifications')}
+            onViewProfile={(_id) => {}}
+            onLike={(_id) => {}}
+            onMessage={(_id) => {}}
+            onUnlock={() => {}}
+            onNotifications={() => {}}
             onTabPress={(tab) => {
               if (tab === 'feed') setScreen('home');
               if (tab === 'search') setScreen('search');
@@ -272,9 +266,9 @@ export default function App() {
         {screen === 'profile' && (
           <MyProfileScreen
             onEdit={() => setScreen('edit-profile')}
-            onSettings={() => console.log('→ Settings')}
+            onSettings={() => {}}
             onPreview={() => setScreen('profile-preview')}
-            onShare={() => console.log('→ Share profile')}
+            onShare={() => {}}
             onEditSection={(_s) => setScreen('edit-profile')}
             onTabPress={(tab) => {
               if (tab === 'feed') setScreen('home');
@@ -288,8 +282,7 @@ export default function App() {
         {screen === 'edit-profile' && (
           <EditProfileScreen
             onBack={() => setScreen('profile')}
-            onSave={(data) => {
-              console.log('→ Profile saved', data);
+            onSave={(_data) => {
               setScreen('profile');
             }}
           />
@@ -305,7 +298,7 @@ export default function App() {
             onBack={() => setScreen('home')}
             onSkip={() => setScreen('home')}
             onLike={() => setScreen('match')}
-            onMessage={() => console.log('→ Conversation')}
+            onMessage={() => {}}
           />
         )}
         {screen === 'match' && (
@@ -324,15 +317,15 @@ export default function App() {
           <LikesReceivedScreen
             onBack={() => setScreen('profile')}
             onProfile={(_id) => setScreen('prospect-profile')}
-            onLike={(id) => console.log('→ Like', id)}
-            onUnlock={() => console.log('→ Premium')}
+            onLike={(_id) => {}}
+            onUnlock={() => {}}
           />
         )}
         {screen === 'matches-list' && (
           <MatchesListScreen
             onBack={() => setScreen('messages')}
             onProfile={(_id) => setScreen('prospect-profile')}
-            onMessage={(id) => console.log('→ Conversation', id)}
+            onMessage={(_id) => {}}
             onSearch={() => setScreen('search')}
           />
         )}
